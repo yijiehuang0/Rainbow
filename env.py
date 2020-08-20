@@ -95,6 +95,7 @@ class Env():
 
   def close(self):
     cv2.destroyAllWindows()
+
   def getRGB(self):
     return self.current_rgb
 

@@ -7,10 +7,8 @@ import json
 from env import Env
 import numpy as np
 
-
 # Globals
 Ts, rewards, Qs, best_avg_reward = [], [], [], -1e10
-
 
 # Test DQN
 def test(args, T, dqn, val_mem, evaluate=False):
@@ -22,6 +20,7 @@ def test(args, T, dqn, val_mem, evaluate=False):
   states = []
   actions = []
   modNumber = 10
+  modSecondNumber = 7
   # Test performance over several episodes
   done = True
   count = 0
@@ -30,7 +29,7 @@ def test(args, T, dqn, val_mem, evaluate=False):
       if done:
         state, reward_sum, done = env.reset(), 0, False
       action = dqn.act_e_greedy(state)  # Choose an action ε-greedily
-      if count % modNumber == 0 and count is not 0:
+      if count % modSecondNumber == 0 and count is not 0:
         rgb = env.getRGB()
         states.append(rgb.tolist())
         actions.append(action)
@@ -45,8 +44,8 @@ def test(args, T, dqn, val_mem, evaluate=False):
         break
   env.close()
   exportData = {}
-  exportData['states'] = states
-  exportData['actions'] = actions
+  exportData['States'] = states
+  exportData['Actions'] = actions
   with open('pong.json', 'w') as f:
     json.dump(exportData, f)
 
